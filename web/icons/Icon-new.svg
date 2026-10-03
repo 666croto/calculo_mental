@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Card / Background Shadow -->
+    <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" flood-color="#0F172A" flood-opacity="0.12" />
+    </filter>
+
+    <!-- Brain Left Side Gradient (Blue Low-Poly Look) -->
+    <linearGradient id="brainBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#1D4ED8" />
+    </linearGradient>
+
+    <!-- Brain Right Side Gradient (Slate/Steel) -->
+    <linearGradient id="brainSlate" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#94A3B8" />
+      <stop offset="100%" stop-color="#475569" />
+    </linearGradient>
+
+    <!-- App Icon Base Clip Path -->
+    <clipPath id="cardClip">
+      <rect x="56" y="56" width="400" height="400" rx="80" ry="80" />
+    </clipPath>
+  </defs>
+
+  <!-- Canvas Outer Background -->
+  <rect width="512" height="512" fill="#F8FAFC" />
+
+  <!-- Main App Card Container with Soft Shadow -->
+  <g filter="url(#dropShadow)">
+    <rect x="56" y="56" width="400" height="400" rx="80" ry="80" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="4" />
+  </g>
+
+  <!-- Icon Content Area -->
+  <g clip-path="url(#cardClip)">
+    
+    <!-- Background Math Orbit / Ring Path -->
+    <path d="M 120,280 A 150,80 -25 1 1 392,230" fill="none" stroke="#2563EB" stroke-width="5" stroke-linecap="round" opacity="0.4" />
+    <path d="M 392,230 A 150,80 -25 0 1 120,280" fill="none" stroke="#2563EB" stroke-width="5" stroke-dasharray="8,8" stroke-linecap="round" opacity="0.3" />
+
+    <!-- Geometric/Polygonal Brain Structure -->
+    <g transform="translate(256, 235)">
+      <!-- Left Hemisphere (Polygonal Shades) -->
+      <path d="M 0,-85 L -45,-70 L -85,-35 L -95,15 L -65,65 L -20,80 L 0,85 Z" fill="url(#brainBlue)" />
+      <!-- Internal Geometric Polygons (Left) -->
+      <path d="M 0,-85 L -45,-70 L -40,-20 Z" fill="#60A5FA" opacity="0.5" />
+      <path d="M -45,-70 L -85,-35 L -55,-10 Z" fill="#2563EB" opacity="0.4" />
+      <path d="M -85,-35 L -95,15 L -50,20 Z" fill="#1D4ED8" opacity="0.6" />
+      <path d="M -95,15 L -65,65 L -40,30 Z" fill="#1E40AF" opacity="0.5" />
+      <path d="M -65,65 L -20,80 L 0,20 Z" fill="#3B82F6" opacity="0.4" />
+
+      <!-- Right Hemisphere (Polygonal Shades) -->
+      <path d="M 0,-85 L 45,-70 L 85,-35 L 95,15 L 65,65 L 20,80 L 0,85 Z" fill="url(#brainSlate)" />
+      <!-- Internal Geometric Polygons (Right) -->
+      <path d="M 0,-85 L 45,-70 L 40,-20 Z" fill="#CBD5E1" opacity="0.5" />
+      <path d="M 45,-70 L 85,-35 L 55,-10 Z" fill="#64748B" opacity="0.4" />
+      <path d="M 85,-35 L 95,15 L 50,20 Z" fill="#475569" opacity="0.6" />
+      <path d="M 95,15 L 65,65 L 40,30 Z" fill="#334155" opacity="0.5" />
+      <path d="M 65,65 L 20,80 L 0,20 Z" fill="#94A3B8" opacity="0.4" />
+
+      <!-- Central Brain Stem Base -->
+      <path d="M -15,80 L -10,105 L 10,105 L 15,80 Z" fill="#1E293B" />
+
+      <!-- Prominent Central White Plus (+) Sign -->
+      <g transform="translate(0, -5)">
+        <circle cx="0" cy="0" r="32" fill="#1E3A8A" opacity="0.9" />
+        <path d="M -14,0 L 14,0 M 0,-14 L 0,14" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" />
+      </g>
+    </g>
+
+    <!-- Floating Orbiting Math Symbols & Numbers -->
+    <g fill="#1E293B" font-family="system-ui, -apple-system, sans-serif" font-weight="bold">
+      <!-- Top Symbols -->
+      <text x="180" y="145" font-size="22" text-anchor="middle" fill="#2563EB">±</text>
+      <text x="235" y="125" font-size="20" text-anchor="middle" fill="#475569">×</text>
+      <text x="290" y="120" font-size="22" text-anchor="middle" fill="#1E3A8A">√</text>
+      <text x="355" y="150" font-size="22" text-anchor="middle" fill="#334155">Σ</text>
+
+      <!-- Side Numbers & Symbols -->
+      <text x="135" y="210" font-size="22" text-anchor="middle" fill="#1E3A8A">1</text>
+      <text x="385" y="235" font-size="22" text-anchor="middle" fill="#2563EB">3</text>
+      <text x="150" y="325" font-size="22" text-anchor="middle" fill="#334155">2</text>
+      <text x="375" y="325" font-size="22" text-anchor="middle" fill="#1E3A8A">8</text>
+
+      <!-- Bottom Numbers -->
+      <text x="220" y="405" font-size="22" text-anchor="middle" fill="#2563EB">5</text>
+      <text x="295" y="405" font-size="22" text-anchor="middle" fill="#475569">5</text>
+    </g>
+
+  </g>
+</svg>
