@@ -6,102 +6,186 @@ class QuestionGenerator {
   final Random _random = Random();
 
   Question generate() {
-    final operations = [
-      '+',
-      '-',
-      '×',
-      'x2',
-      '÷',
-      'c1',
-      'c2',
-      'e1',
-      'e2',
-    ];
+    final type = _randomQuestionType();
 
-    final operation =
-        operations[_random.nextInt(operations.length)];
-
-    switch (operation) {
-      case '+':
+    switch (type) {
+      // Operaciones básicas
+      case QuestionType.addition:
         return _addition();
-      
-      case '+2':
+
+      case QuestionType.additionTwo:
         return _additionTwo();
 
-      case '-':
+      case QuestionType.subtraction:
         return _subtraction();
 
-      case '×':
+      case QuestionType.subtractionTwo:
+        return _subtractionTwo();
+
+      case QuestionType.multiplication:
         return _multiplication();
 
-      case 'x2':
+      case QuestionType.multiplicationTwo:
         return _multiplicationTwo();
 
-      case '÷':
+      case QuestionType.division:
         return _division();
 
-      case 'c1':
+      // Operaciones combinadas
+      case QuestionType.combinedAddition:
         return _combinedAddition();
 
-      case 'c2':
+      case QuestionType.combinedSubtraction:
         return _combinedSubtraction();
 
-      case 'e1':
+      // Ecuaciones
+      case QuestionType.equationOne:
         return _equationOne();
 
-      case 'e2':
+      case QuestionType.equationTwo:
         return _equationTwo();
 
-      default:
-        return _addition();
+      // Composición de funciones
+      case QuestionType.composition:
+        return _composition();
+
+      // Operaciones entre funciones
+      case QuestionType.functionAddition:
+        return _functionAddition();
+
+      case QuestionType.functionSubtraction:
+        return _functionSubtraction();
+
+      case QuestionType.functionMultiplication:
+        return _functionMultiplication();
+
+      case QuestionType.functionDivision:
+        return _functionDivision();
+
+      // Potencias
+      case QuestionType.power:
+        return _power();
+
+      // Raíces
+      case QuestionType.perfectSquareRoot:
+        return _perfectSquareRoot();
     }
   }
 
-  // Verifica que el número tenga como máximo
-  // dos decimales.
+  // ------------------------------------------------------------
+  // TIPOS DE PREGUNTA
+  // ------------------------------------------------------------
+
+  QuestionType _randomQuestionType() {
+    const types = QuestionType.values;
+
+    return types[_random.nextInt(types.length)];
+  }
+
+  // ------------------------------------------------------------
+  // HELPERS
+  // ------------------------------------------------------------
+
+  int _randomInt(int max) {
+    return _random.nextInt(max) + 1;
+  }
+
+  int _randomSignedInt(int max) {
+    return _random.nextInt(max * 2 + 1) - max;
+  }
+
   bool _hasAtMostTwoDecimals(double value) {
     return (value * 100).roundToDouble() == value * 100;
   }
 
+  String _formatLinearFunction(int a, int b) {
+    if (b == 0) {
+      return '${a}x';
+    }
+
+    if (b > 0) {
+      return '${a}x + $b';
+    }
+
+    return '${a}x - ${-b}';
+  }
+
+  // ------------------------------------------------------------
+  // OPERACIONES BÁSICAS
+  // ------------------------------------------------------------
+
   Question _addition() {
-    final number1 = _random.nextInt(1000) + 1;
-    final number2 = _random.nextInt(1000) + 1;
+    final a = _randomInt(1000);
+    final b = _randomInt(1000);
 
     return Question(
-      text: '$number1 + $number2 = ?',
-      answer: (number1 + number2).toDouble(),
+      text: '$a + $b = ?',
+      answer: (a + b).toDouble(),
+    );
+  }
+
+  Question _additionTwo() {
+    final a = _randomInt(1000);
+    final b = _randomInt(1000);
+    final c = _randomInt(1000);
+
+    return Question(
+      text: '$a + $b + $c = ?',
+      answer: (a + b + c).toDouble(),
     );
   }
 
   Question _subtraction() {
-    var number1 = _random.nextInt(1000) + 1;
-    var number2 = _random.nextInt(1000) + 1;
+    var a = _randomInt(1000);
+    var b = _randomInt(1000);
 
-    if (number2 > number1) {
-      final temp = number1;
-      number1 = number2;
-      number2 = temp;
+    if (b > a) {
+      final temp = a;
+      a = b;
+      b = temp;
     }
 
     return Question(
-      text: '$number1 - $number2 = ?',
-      answer: (number1 - number2).toDouble(),
+      text: '$a - $b = ?',
+      answer: (a - b).toDouble(),
+    );
+  }
+
+  Question _subtractionTwo() {
+    final a = _randomInt(1000);
+    final b = _randomInt(1000);
+    final c = _randomInt(1000);
+
+    return Question(
+      text: '$a - $b - $c = ?',
+      answer: (a - b - c).toDouble(),
     );
   }
 
   Question _multiplication() {
-    final number1 = _random.nextInt(12) + 1;
-    final number2 = _random.nextInt(12) + 1;
+    final a = _randomInt(12);
+    final b = _randomInt(12);
 
     return Question(
-      text: '$number1 × $number2 = ?',
-      answer: (number1 * number2).toDouble(),
+      text: '$a × $b = ?',
+      answer: (a * b).toDouble(),
+    );
+  }
+
+  Question _multiplicationTwo() {
+    final a = _randomInt(9);
+    final b = _randomInt(9);
+    final c = _randomInt(9);
+
+    return Question(
+      text: '$a × $b × $c = ?',
+      answer: (a * b * c).toDouble(),
     );
   }
 
   Question _division() {
-    final divisor = _random.nextInt(10) + 1;
-    final result = _random.nextInt(10) + 1;
+    final divisor = _randomInt(10);
+    final result = _randomInt(10);
 
     final dividend = divisor * result;
 
@@ -111,60 +195,64 @@ class QuestionGenerator {
     );
   }
 
-  Question _combinedAddition() {
-    final number1 = _random.nextInt(20) + 1;
-    final number2 = _random.nextInt(20) + 1;
-    final number3 = _random.nextInt(10) + 1;
+  // ------------------------------------------------------------
+  // OPERACIONES COMBINADAS
+  // ------------------------------------------------------------
 
-    final answer = (number1 + number2) * number3;
+  Question _combinedAddition() {
+    final a = _randomInt(20);
+    final b = _randomInt(20);
+    final c = _randomInt(10);
+
+    final answer = (a + b) * c;
 
     return Question(
-      text: '($number1 + $number2) × $number3 = ?',
+      text: '($a + $b) × $c = ?',
       answer: answer.toDouble(),
     );
   }
 
   Question _combinedSubtraction() {
-    var number1 = _random.nextInt(20) + 1;
-    var number2 = _random.nextInt(20) + 1;
-    final number3 = _random.nextInt(10) + 1;
+    var a = _randomInt(20);
+    var b = _randomInt(20);
+    final c = _randomInt(10);
 
-    if (number2 > number1) {
-      final temp = number1;
-      number1 = number2;
-      number2 = temp;
+    if (b > a) {
+      final temp = a;
+      a = b;
+      b = temp;
     }
 
-    final answer = (number1 - number2) * number3;
+    final answer = (a - b) * c;
 
     return Question(
-      text: '($number1 - $number2) × $number3 = ?',
+      text: '($a - $b) × $c = ?',
       answer: answer.toDouble(),
     );
   }
 
+  // ------------------------------------------------------------
+  // ECUACIONES
+  // ------------------------------------------------------------
+
   Question _equationOne() {
     while (true) {
-      final number1 = _random.nextInt(20) + 1;
-      final number2 = _random.nextInt(20) + 1;
-      final number3 = _random.nextInt(10) + 1;
+      final a = _randomInt(20);
+      final b = _randomInt(20);
+      final c = _randomInt(10);
 
-      // Evitamos división por cero.
-      if (number1 == number3) {
+      if (a == c) {
         continue;
       }
 
-      final answer =
-          -number2 / (number1 - number3);
+      final answer = -b / (a - c);
 
-      // Evitamos números periódicos o con más
-      // de dos decimales.
       if (!_hasAtMostTwoDecimals(answer)) {
         continue;
       }
 
       return Question(
-        text: '$number1 x + $number2 = $number3 x',
+        text: '$a x + $b = $c x',
         answer: answer,
       );
     }
@@ -172,52 +260,237 @@ class QuestionGenerator {
 
   Question _equationTwo() {
     while (true) {
-      final number1 = _random.nextInt(20) + 1;
-      final number2 = _random.nextInt(20) + 1;
-      final number3 = _random.nextInt(10) + 1;
-      final number4 = _random.nextInt(10) + 1;
+      final a = _randomInt(20);
+      final b = _randomInt(20);
+      final c = _randomInt(10);
+      final d = _randomInt(10);
 
-      // Evitamos división por cero.
-      if (number1 == number3) {
+      if (a == c) {
         continue;
       }
 
-      final answer =
-          (number4 - number2) / (number1 - number3);
+      final answer = (d - b) / (a - c);
 
-      // Evitamos números periódicos o con más
-      // de dos decimales.
+      if (!_hasAtMostTwoDecimals(answer)) {
+        continue;
+      }
+
+      return Question(
+        text: '$a x + $b = $c x + $d',
+        answer: answer,
+      );
+    }
+  }
+
+  // ------------------------------------------------------------
+  // COMPOSICIÓN DE FUNCIONES
+  // ------------------------------------------------------------
+
+  Question _composition() {
+    // f(x) = ax + b
+    final a = _randomInt(5);
+    final b = _randomSignedInt(5);
+
+    // g(x) = cx + d
+    final c = _randomInt(5);
+    final d = _randomSignedInt(5);
+
+    final x = _randomInt(10);
+
+    // Primero g(x)
+    final gx = c * x + d;
+
+    // Después f(g(x))
+    final answer = a * gx + b;
+
+    return Question(
+      text:
+          'f(x) = ${_formatLinearFunction(a, b)}\n'
+          'g(x) = ${_formatLinearFunction(c, d)}\n\n'
+          'f(g($x)) = ?',
+      answer: answer.toDouble(),
+    );
+  }
+
+  // ------------------------------------------------------------
+  // OPERACIONES ENTRE FUNCIONES
+  // ------------------------------------------------------------
+
+  Question _functionAddition() {
+    final a = _randomInt(5);
+    final b = _randomSignedInt(5);
+
+    final c = _randomInt(5);
+    final d = _randomSignedInt(5);
+
+    final x = _randomInt(10);
+
+    final fx = a * x + b;
+    final gx = c * x + d;
+
+    final answer = fx + gx;
+
+    return Question(
+      text:
+          'f(x) = ${_formatLinearFunction(a, b)}\n'
+          'g(x) = ${_formatLinearFunction(c, d)}\n\n'
+          '(f + g)($x) = ?',
+      answer: answer.toDouble(),
+    );
+  }
+
+  Question _functionSubtraction() {
+    final a = _randomInt(5);
+    final b = _randomSignedInt(5);
+
+    final c = _randomInt(5);
+    final d = _randomSignedInt(5);
+
+    final x = _randomInt(10);
+
+    final fx = a * x + b;
+    final gx = c * x + d;
+
+    final answer = fx - gx;
+
+    return Question(
+      text:
+          'f(x) = ${_formatLinearFunction(a, b)}\n'
+          'g(x) = ${_formatLinearFunction(c, d)}\n\n'
+          '(f - g)($x) = ?',
+      answer: answer.toDouble(),
+    );
+  }
+
+  Question _functionMultiplication() {
+    final a = _randomInt(5);
+    final b = _randomSignedInt(5);
+
+    final c = _randomInt(5);
+    final d = _randomSignedInt(5);
+
+    final x = _randomInt(5);
+
+    final fx = a * x + b;
+    final gx = c * x + d;
+
+    final answer = fx * gx;
+
+    return Question(
+      text:
+          'f(x) = ${_formatLinearFunction(a, b)}\n'
+          'g(x) = ${_formatLinearFunction(c, d)}\n\n'
+          '(f × g)($x) = ?',
+      answer: answer.toDouble(),
+    );
+  }
+
+  Question _functionDivision() {
+    while (true) {
+      final a = _randomInt(5);
+      final b = _randomSignedInt(5);
+
+      final c = _randomInt(5);
+      final d = _randomSignedInt(5);
+
+      final x = _randomInt(10);
+
+      final fx = a * x + b;
+      final gx = c * x + d;
+
+      // Evitamos dividir por cero.
+      if (gx == 0) {
+        continue;
+      }
+
+      final answer = fx / gx;
+
+      // Solo resultados con máximo dos decimales.
       if (!_hasAtMostTwoDecimals(answer)) {
         continue;
       }
 
       return Question(
         text:
-            '$number1 X + $number2 = $number3 X + $number4',
+            'f(x) = ${_formatLinearFunction(a, b)}\n'
+            'g(x) = ${_formatLinearFunction(c, d)}\n\n'
+            '(f ÷ g)($x) = ?',
         answer: answer,
       );
     }
   }
 
-  Question _multiplicationTwo() {
-    final number1 = _random.nextInt(9) + 1;
-    final number2 = _random.nextInt(9) + 1;
-    final number3 = _random.nextInt(9) + 1;
+  // ------------------------------------------------------------
+  // POTENCIAS
+  // ------------------------------------------------------------
+
+  Question _power() {
+    final base = _randomInt(10);
+
+    // Exponentes pequeños para evitar números enormes.
+    final exponent = _random.nextInt(4) + 2;
+
+    final answer = pow(base, exponent).toDouble();
 
     return Question(
-      text: '$number1 × $number2 x $number3= ?',
-      answer: (number1 * number2 * number3).toDouble(),
+      text: '$base^$exponent = ?',
+      answer: answer,
     );
   }
 
-  Question _additionTwo() {
-    final number1 = _random.nextInt(1000) + 1;
-    final number2 = _random.nextInt(1000) + 1;
-    final number3 = _random.nextInt(1000) + 1;
+  // ------------------------------------------------------------
+  // RAÍCES CUADRADAS PERFECTAS
+  // ------------------------------------------------------------
+
+  Question _perfectSquareRoot() {
+    // Elegimos primero la raíz.
+    final root = _randomInt(20);
+
+    // Construimos el cuadrado perfecto.
+    final number = root * root;
 
     return Question(
-      text: '$number1 + $number2 + $number3 = ?',
-      answer: (number1 + number2 + number3).toDouble(),
+      text: '√$number = ?',
+      answer: root.toDouble(),
     );
   }
 }
+
+// ============================================================
+// TIPOS DE PREGUNTA
+// ============================================================
+
+enum QuestionType {
+  // Operaciones básicas
+  addition,
+  additionTwo,
+  subtraction,
+  subtractionTwo,
+  multiplication,
+  multiplicationTwo,
+  division,
+
+  // Operaciones combinadas
+  combinedAddition,
+  combinedSubtraction,
+
+  // Ecuaciones
+  equationOne,
+  equationTwo,
+
+  // Funciones
+  composition,
+
+  // Operaciones entre funciones
+  functionAddition,
+  functionSubtraction,
+  functionMultiplication,
+  functionDivision,
+
+  // Potencias
+  power,
+
+  // Raíces
+  perfectSquareRoot,
+}
+
