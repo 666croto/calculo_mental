@@ -4,7 +4,7 @@ import 'dart:math';
 class Helper {
   final Random _random = Random();
 
-  get random => _random;
+  Random get random => _random;
 
 
   int randomInt(int max) {
