@@ -15,11 +15,9 @@ class _GamePageState extends State<GamePage> {
   static const Color accentColor = Color(0xFFF0FF24);
   static const Color darkColor = Color(0xFF111111);
 
-  final TextEditingController _answerController =
-      TextEditingController();
+  final TextEditingController _answerController = TextEditingController();
 
-  final QuestionGenerator _questionGenerator =
-      QuestionGenerator();
+  final QuestionGenerator _questionGenerator = QuestionGenerator();
 
   late Question _question;
   int _streak = 0;
@@ -40,9 +38,8 @@ class _GamePageState extends State<GamePage> {
     _question = _questionGenerator.generate();
   }
 
-  void _checkAnswer() {
-    final text =
-        _answerController.text.trim().replaceAll(',', '.');
+  Future<void> _checkAnswer() async {
+    final text = _answerController.text.trim().replaceAll(',', '.');
 
     final userAnswer = double.tryParse(text);
 
@@ -53,8 +50,7 @@ class _GamePageState extends State<GamePage> {
       return;
     }
 
-    final difference =
-        (userAnswer - _question.answer).abs();
+    final difference = (userAnswer - _question.answer).abs();
 
     final isCorrect = difference < 0.0001;
 
@@ -66,6 +62,14 @@ class _GamePageState extends State<GamePage> {
 
         _generateQuestion();
         _answerController.clear();
+      });
+
+      Future.delayed(const Duration(seconds: 2), () {
+        if (!mounted) return;
+
+        setState(() {
+          _message = '';
+        });
       });
     } else {
       setState(() {
@@ -82,6 +86,9 @@ class _GamePageState extends State<GamePage> {
       _answerController.clear();
       _generateQuestion();
     });
+    setState(() {
+          _message = '';
+        });
   }
 
   @override
@@ -102,9 +109,7 @@ class _GamePageState extends State<GamePage> {
         centerTitle: true,
         title: const Text(
           'Cálculo Mental',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
 
@@ -114,9 +119,7 @@ class _GamePageState extends State<GamePage> {
             padding: const EdgeInsets.all(24),
 
             child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: 500,
-              ),
+              constraints: const BoxConstraints(maxWidth: 500),
 
               child: Column(
                 children: [
@@ -154,11 +157,7 @@ class _GamePageState extends State<GamePage> {
     return Row(
       children: [
         Expanded(
-          child: _buildStatCard(
-            icon: '🔥',
-            value: '$_streak',
-            label: 'Racha',
-          ),
+          child: _buildStatCard(icon: '🔥', value: '$_streak', label: 'Racha'),
         ),
 
         const SizedBox(width: 12),
@@ -190,10 +189,7 @@ class _GamePageState extends State<GamePage> {
     required String label,
   }) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 14,
-        horizontal: 8,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
 
       decoration: BoxDecoration(
         color: Colors.white,
@@ -210,27 +206,18 @@ class _GamePageState extends State<GamePage> {
 
       child: Column(
         children: [
-          Text(
-            icon,
-            style: const TextStyle(fontSize: 22),
-          ),
+          Text(icon, style: const TextStyle(fontSize: 22)),
 
           const SizedBox(height: 4),
 
           Text(
             value,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
 
           Text(
             label,
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey.shade600,
-            ),
+            style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
           ),
         ],
       ),
@@ -240,10 +227,7 @@ class _GamePageState extends State<GamePage> {
   Widget _buildQuestionCard() {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(
-        vertical: 35,
-        horizontal: 20,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 35, horizontal: 20),
 
       decoration: BoxDecoration(
         color: darkColor,
@@ -290,18 +274,14 @@ class _GamePageState extends State<GamePage> {
     return TextField(
       controller: _answerController,
 
-      keyboardType:
-          const TextInputType.numberWithOptions(
+      keyboardType: const TextInputType.numberWithOptions(
         decimal: true,
         signed: true,
       ),
 
       textAlign: TextAlign.center,
 
-      style: const TextStyle(
-        fontSize: 26,
-        fontWeight: FontWeight.bold,
-      ),
+      style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
 
       decoration: InputDecoration(
         hintText: 'Tu respuesta',
@@ -316,10 +296,7 @@ class _GamePageState extends State<GamePage> {
 
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(
-            color: primaryColor,
-            width: 2,
-          ),
+          borderSide: const BorderSide(color: primaryColor, width: 2),
         ),
       ),
 
@@ -348,10 +325,7 @@ class _GamePageState extends State<GamePage> {
 
         child: const Text(
           'COMPROBAR',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -386,9 +360,7 @@ class _GamePageState extends State<GamePage> {
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: isCorrect
-              ? Colors.black
-              : Colors.red.shade700,
+          color: isCorrect ? Colors.black : Colors.red.shade700,
         ),
       ),
     );

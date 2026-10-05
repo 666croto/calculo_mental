@@ -22,7 +22,7 @@ class EquationGenerator {
       }
 
       return Question(
-        text: '$a x + $b = $c x',
+        text: '$a 𝑥 + $b = $c 𝑥',
         answer: answer,
       );
     }
@@ -46,7 +46,7 @@ class EquationGenerator {
       }
 
       return Question(
-        text: '$a x + $b = $c x + $d',
+        text: '$a 𝑥 + $b = $c 𝑥 + $d',
         answer: answer,
       );
     }

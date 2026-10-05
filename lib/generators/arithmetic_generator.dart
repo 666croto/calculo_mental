@@ -1,17 +1,15 @@
 import 'dart:math';
 
 import 'package:calculo_mental/models/question.dart';
+import 'package:calculo_mental/utils/helper.dart';
 
 class ArithmeticGenerator {
-  final Random _random;
+  final Helper _helper = Helper();
 
-  ArithmeticGenerator({
-    Random? random,
-  }) : _random = random ?? Random();
 
   Question addition() {
-    final a = _randomInt(1000);
-    final b = _randomInt(1000);
+    final a = _helper.randomInt(1000);
+    final b = _helper.randomInt(1000);
 
     return Question(
       text: '$a + $b = ?',
@@ -20,8 +18,8 @@ class ArithmeticGenerator {
   }
 
   Question subtraction() {
-    var a = _randomInt(1000);
-    var b = _randomInt(1000);
+    var a = _helper.randomInt(1000);
+    var b = _helper.randomInt(1000);
 
     if (b > a) {
       (a, b) = (b, a);
@@ -33,14 +31,11 @@ class ArithmeticGenerator {
     );
   }
   
-  int _randomInt(int max) {
-    return _random.nextInt(max) + 1;
-  }
 
   Question additionTwo() {
-    final a = _randomInt(1000);
-    final b = _randomInt(1000);
-    final c = _randomInt(1000);
+    final a = _helper.randomInt(1000);
+    final b = _helper.randomInt(1000);
+    final c = _helper.randomInt(1000);
 
     return Question(
       text: '$a + $b + $c = ?',
@@ -49,9 +44,9 @@ class ArithmeticGenerator {
   }
 
     Question subtractionTwo() {
-    final a = _randomInt(1000);
-    final b = _randomInt(1000);
-    final c = _randomInt(1000);
+    final a = _helper.randomInt(1000);
+    final b = _helper.randomInt(1000);
+    final c = _helper.randomInt(1000);
 
     return Question(
       text: '$a - $b - $c = ?',
@@ -60,8 +55,8 @@ class ArithmeticGenerator {
   }
 
   Question multiplication() {
-    final a = _randomInt(12);
-    final b = _randomInt(12);
+    final a = _helper.randomInt(12);
+    final b = _helper.randomInt(12);
 
     return Question(
       text: '$a × $b = ?',
@@ -70,9 +65,9 @@ class ArithmeticGenerator {
   }
 
   Question multiplicationTwo() {
-    final a = _randomInt(9);
-    final b = _randomInt(9);
-    final c = _randomInt(9);
+    final a = _helper.randomInt(9);
+    final b = _helper.randomInt(9);
+    final c = _helper.randomInt(9);
 
     return Question(
       text: '$a × $b × $c = ?',
@@ -81,8 +76,8 @@ class ArithmeticGenerator {
   }
 
   Question division() {
-    final divisor = _randomInt(10);
-    final result = _randomInt(10);
+    final divisor = _helper.randomInt(10);
+    final result = _helper.randomInt(10);
 
     final dividend = divisor * result;
 
@@ -93,9 +88,9 @@ class ArithmeticGenerator {
   }
 
   Question combinedAddition() {
-    final a = _randomInt(20);
-    final b = _randomInt(20);
-    final c = _randomInt(10);
+    final a = _helper.randomInt(20);
+    final b = _helper.randomInt(20);
+    final c = _helper.randomInt(10);
 
     final answer = (a + b) * c;
 
@@ -106,9 +101,9 @@ class ArithmeticGenerator {
   }
 
   Question combinedSubtraction() {
-    var a = _randomInt(20);
-    var b = _randomInt(20);
-    final c = _randomInt(10);
+    var a = _helper.randomInt(20);
+    var b = _helper.randomInt(20);
+    final c = _helper.randomInt(10);
 
     if (b > a) {
       final temp = a;

@@ -23,9 +23,9 @@ class FunctionGenerator {
 
     return Question(
       text:
-          'f(x) = ${helper.formatLinearFunction(a, b)}\n'
-          'g(x) = ${helper.formatLinearFunction(c, d)}\n\n'
-          'f(g($x)) = ?',
+          '𝑓(𝑥) = ${helper.formatLinearFunction(a, b)}\n'
+          '𝑔(𝑥) = ${helper.formatLinearFunction(c, d)}\n\n'
+          '𝑓(𝑔($x)) = ?',
       answer: answer.toDouble(),
     );
   }
@@ -46,9 +46,9 @@ class FunctionGenerator {
 
     return Question(
       text:
-          'f(x) = ${helper.formatLinearFunction(a, b)}\n'
-          'g(x) = ${helper.formatLinearFunction(c, d)}\n\n'
-          '(f + g)($x) = ?',
+          '𝑓(𝑥) = ${helper.formatLinearFunction(a, b)}\n'
+          '𝑔(𝑥) = ${helper.formatLinearFunction(c, d)}\n\n'
+          '(𝑓 + 𝑔)($x) = ?',
       answer: answer.toDouble(),
     );
   }
@@ -69,9 +69,9 @@ class FunctionGenerator {
 
     return Question(
       text:
-          'f(x) = ${helper.formatLinearFunction(a, b)}\n'
-          'g(x) = ${helper.formatLinearFunction(c, d)}\n\n'
-          '(f - g)($x) = ?',
+          '𝑓(𝑥) = ${helper.formatLinearFunction(a, b)}\n'
+          '𝑔(𝑥) = ${helper.formatLinearFunction(c, d)}\n\n'
+          '(𝑓 - 𝑔)($x) = ?',
       answer: answer.toDouble(),
     );
   }
@@ -92,9 +92,9 @@ class FunctionGenerator {
 
     return Question(
       text:
-          'f(x) = ${helper.formatLinearFunction(a, b)}\n'
-          'g(x) = ${helper.formatLinearFunction(c, d)}\n\n'
-          '(f × g)($x) = ?',
+          '𝑓(𝑥) = ${helper.formatLinearFunction(a, b)}\n'
+          '𝑔(𝑥) = ${helper.formatLinearFunction(c, d)}\n\n'
+          '(𝑓 𝑥 𝑔)($x) = ?',
       answer: answer.toDouble(),
     );
   }
@@ -126,9 +126,9 @@ class FunctionGenerator {
 
       return Question(
         text:
-            'f(x) = ${helper.formatLinearFunction(a, b)}\n'
-            'g(x) = ${helper.formatLinearFunction(c, d)}\n\n'
-            '(f ÷ g)($x) = ?',
+            '𝑓(𝑥) = ${helper.formatLinearFunction(a, b)}\n'
+            '𝑔(𝑥) = ${helper.formatLinearFunction(c, d)}\n\n'
+            '(𝑓 ÷ 𝑔)($x) = ?',
         answer: answer,
       );
     }

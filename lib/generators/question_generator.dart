@@ -20,7 +20,7 @@ class QuestionGenerator {
   QuestionGenerator({
     Random? random,
   })  : _random = random ?? Random(),
-        _arithmetic = ArithmeticGenerator(random: random),
+        _arithmetic = ArithmeticGenerator(),
         _equations = EquationGenerator(),
         _functions = FunctionGenerator(),
         _powers = PowerGenerator(),
