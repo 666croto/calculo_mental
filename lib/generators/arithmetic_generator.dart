@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:calculo_mental/models/question.dart';
 import 'package:calculo_mental/utils/helper.dart';
 
