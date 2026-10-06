@@ -94,7 +94,7 @@ class FunctionGenerator {
       text:
           '𝑓(𝑥) = ${helper.formatLinearFunction(a, b)}\n'
           '𝑔(𝑥) = ${helper.formatLinearFunction(c, d)}\n\n'
-          '(𝑓 𝑥 𝑔)($x) = ?',
+          '(𝑓 x 𝑔)($x) = ?',
       answer: answer.toDouble(),
     );
   }

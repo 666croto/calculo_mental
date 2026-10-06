@@ -21,13 +21,13 @@ class Helper {
 
   String formatLinearFunction(int a, int b) {
     if (b == 0) {
-      return '${a}x';
+      return '${a}𝑥';
     }
 
     if (b > 0) {
-      return '${a}x + $b';
+      return '${a}𝑥 + $b';
     }
 
-    return '${a}x - ${-b}';
+    return '${a}𝑥 - ${-b}';
   }
 }
